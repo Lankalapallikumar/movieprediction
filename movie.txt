@@ -1,0 +1,139 @@
+# Save the implementation steps as a text file
+steps = """
+Steps to Implement and Run the Code:
+
+1. Install Required Libraries:
+   Ensure you have the necessary Python libraries installed. You can use `pip` to install them if you don’t already have them:
+   
+   pip install pandas numpy scikit-learn matplotlib seaborn
+
+2. Prepare the Dataset:
+   Ensure the CSV file (`IMDb Movies India.csv`) is available in the working directory where the script will be run. The dataset should contain columns such as `Rating`, `Votes`, `Duration`, `Year`, `Director`, `Genre`, and `Actor 1`.
+
+3. Save the Python Script:
+   Copy the entire Python code into a new `.py` file, for example, `imdb_rating_predictor.py`.
+
+4. Run the Script:
+   Execute the script via the terminal or command prompt:
+
+   python imdb_rating_predictor.py
+
+5. Input Data from the User:
+   When the script runs, it will prompt the user for inputs related to a new movie for which they want to predict the IMDb rating. The user will need to enter:
+   
+   - Release Year (e.g., 2023)
+   - Duration in minutes (e.g., 120)
+   - Expected Votes (e.g., 15000)
+   - Director's Name (e.g., 'Rajkumar Hirani')
+   - Genres (comma-separated, e.g., 'Comedy, Drama')
+   - Lead Actor's Name (e.g., 'Aamir Khan')
+
+End User Data Input:
+
+When the script is run, it will ask for the following inputs:
+
+1. Release Year (e.g. 2023):
+   - Example input: 2023
+
+2. Duration in minutes (e.g. 150):
+   - Example input: 120
+
+3. Expected votes (e.g. 15000):
+   - Example input: 15000
+
+4. Director name:
+   - Example input: Rajkumar Hirani
+
+5. Genre(s), comma-separated:
+   - Example input: Comedy, Drama
+
+6. Lead actor name:
+   - Example input: Aamir Khan
+
+The code will then process this input and predict the IMDb rating for the provided movie using the trained RandomForestRegressor model.
+
+What the Code Does:
+1. Preprocessing:
+   - The dataset is cleaned and preprocessed by handling missing values, converting categorical variables, and calculating additional features like the success of a director, genre, and actor.
+   
+2. Model Training:
+   - A RandomForestRegressor model is used to train on the data. The features are selected, and the model is trained using the training set.
+
+3. User Prediction:
+   - After training, the model allows the user to input a new movie’s details and uses the trained model to predict the IMDb rating for that movie.
+
+4. Feature Importance and Visualizations:
+   - It shows a bar plot of the feature importance to visualize which features influence the IMDb rating prediction the most.
+   - The second plot compares the predicted rating against the actual distribution of IMDb ratings from the dataset.
+   - The third plot is a scatter plot of Genre Popularity vs. Average Rating for the genres provided by the user, showing how popular genres relate to their average IMDb rating.
+
+Example of Input/Output:
+
+When prompted, a user might input:
+
+Release Year (e.g. 2023): 2023
+Duration in minutes: 150
+Expected votes (e.g. 15000): 15000
+Director name: Rajkumar Hirani
+Genre(s), comma-separated: Comedy, Drama
+Lead actor name: Aamir Khan
+
+The output will be:
+
+Mean Squared Error: 0.63
+R² Score: 0.91
+
+--- Predict a New Movie’s IMDb Rating ---
+Predicted IMDb Rating: 7.85
+
+Visualizations:
+- The first plot will display Feature Importance to show which factors (e.g., director success, genre, etc.) are most important in predicting ratings.
+- The second plot will show a Histogram of IMDb ratings with a red line indicating the predicted rating.
+- The third plot will show the Genre Popularity vs Avg Rating scatter plot with labels for the selected genres.
+"""
+
+file_path = '/mnt/data/steps_to_implement.txt'
+
+with open(file_path, 'w') as file:
+    file.write(steps)
+
+file_path
+
+
+
+# Saving the explanation as a text file
+explanation = """
+Main Features for Prediction:
+
+1. Duration: The length of the movie in minutes. Longer movies could potentially have a different rating due to pacing and audience engagement.
+2. Votes: The number of votes the movie has received. A higher number of votes may correlate with a more stable and reliable rating, since it reflects a wider audience.
+3. Director Success: This is a calculated feature based on the average rating of movies directed by the same director. Movies by well-known or successful directors could have higher ratings.
+4. Genre Average Rating: Each movie’s genre(s) have an associated average rating (calculated from all movies of the same genre). This feature indicates the general popularity or rating trends in the movie's genre.
+5. Actor 1 Success: The average rating of movies starring the same lead actor. Well-known or successful actors may positively influence the movie's rating.
+6. Genre Count: The number of genres associated with the movie. Movies with multiple genres could potentially appeal to a broader audience.
+
+These features were used to train a Random Forest Regressor to predict the IMDb rating of a movie based on the above characteristics.
+
+Plots Explained:
+
+1. Feature Importance Plot:
+   - This plot visually represents the importance of each feature in predicting the IMDb rating. It shows how much each feature contributes to the model's decision-making process. Features like Votes, Director Success, and Actor1 Success might have a higher importance score, indicating they have a more significant impact on predicting movie ratings.
+
+2. Predicted Rating vs IMDb Rating Distribution Plot:
+   - This plot compares the predicted ratings (from the model) against the actual IMDb ratings of movies. The vertical red line indicates the predicted rating for a new movie based on user input. This helps users visualize how well the model's predictions align with the actual ratings.
+   - The distribution of IMDb ratings is also shown as a histogram with a Kernel Density Estimate (KDE), giving insight into how ratings are distributed across all movies in the dataset.
+
+3. Genre Popularity vs Average Rating:
+   - This scatter plot shows the relationship between the popularity of a genre (the number of movies within that genre) and its average rating. Each point represents a genre. 
+   - The x-axis is the popularity (how many movies belong to each genre), and the y-axis is the average rating of that genre. 
+   - It highlights how genres with more movies may have a different average rating compared to genres with fewer movies.
+
+These features and plots provide insights into what influences movie ratings and allow you to predict the IMDb rating of a new movie based on its characteristics.
+"""
+
+# Saving to a text file
+file_path = '/mnt/data/IMDb_Prediction_Explanation.txt'
+with open(file_path, 'w') as file:
+    file.write(explanation)
+
+file_path
